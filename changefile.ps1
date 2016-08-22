@@ -1,7 +1,8 @@
 Param(
   [string]$folderlocation
 )
-$folder = get-acl $folderlocation
-$account = $env:account
+$acl = get-acl $folderlocation
+$account = "$env:computername\$env:username"
 
-$folder.setowner([System.Security.Principal.NTAccount]"")
+$acl.setowner([System.Security.Principal.NTAccount]"$account")
+set-acl $folderlocation $location
